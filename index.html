@@ -241,6 +241,24 @@
   <!-- Overlay for mobile sidebar -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+  <!-- Modal for Documentation -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h2 id="modalTitle">Título</h2>
+        <button class="modal-close" id="modalClose" aria-label="Fechar modal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-content" id="modalContent">
+        <!-- Content will be injected -->
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

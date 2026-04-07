@@ -1,6 +1,6 @@
 // ============================================
 // Chat AI - Front-end Logic
-// Simulated AI responses with typing effect
+// Tab Navigation + Simulated AI responses with typing effect
 // ============================================
 
 const STORAGE_KEY = 'chatSessions';
@@ -33,6 +33,709 @@ const AI_RESPONSES = {
     '4. Mantenha especificidade baixa para evitar overrides\n' +
     '5. Use `clamp()` para tipografia responsiva',
 };
+
+// Documentation data
+const DOCS_DATA = [
+  {
+    id: 'flexbox',
+    title: 'Flexbox Avançado',
+    icon: 'layout',
+    tag: 'Layout',
+    content: `
+## Flexbox - Guia Completo
+
+Flexbox (Flexible Box Layout) é um modelo de layout unidimensional que distribui espaço entre itens em um container.
+
+### Propriedades do Container
+
+\`\`\`css
+.container {
+  display: flex;
+  justify-content: center; /* alinhamento horizontal */
+  align-items: center; /* alinhamento vertical */
+  flex-wrap: wrap; /* quebra de linha */
+  gap: 16px; /* espaçamento entre itens */
+}
+\`\`\`
+
+### Propriedades dos Itens
+
+\`\`\`css
+.item {
+  flex-grow: 1; /* cresce se houver espaço */
+  flex-shrink: 0; /* não encolhe */
+  flex-basis: 200px; /* tamanho inicial */
+  align-self: flex-start; /* alinhamento individual */
+}
+\`\`\`
+
+### Casos de Uso Comuns
+
+- Centralização perfeita (vertical + horizontal)
+- Barras de navegação
+- Cards com igual altura
+- Layouts responsivos
+    `
+  },
+  {
+    id: 'grid',
+    title: 'CSS Grid Avançado',
+    icon: 'grid',
+    tag: 'Layout',
+    content: `
+## CSS Grid - Sistema Bidimensional
+
+CSS Grid é perfeito para criar layouts complexos de forma simples e poderosa.
+
+### Grid Básico
+
+\`\`\`css
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+}
+\`\`\`
+
+### Grid Areas
+
+\`\`\`css
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "sidebar main main"
+    "footer footer footer";
+}
+
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }
+\`\`\`
+
+### Repeat e Auto-fit
+
+\`\`\`css
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+\`\`\`
+
+Cria colunas responsivas automaticamente!
+    `
+  },
+  {
+    id: 'custom-properties',
+    title: 'CSS Custom Properties',
+    icon: 'variables',
+    tag: 'Variáveis',
+    content: `
+## Variáveis CSS (Custom Properties)
+
+Variáveis CSS permitem armazenar e reutilizar valores em toda a folha de estilo.
+
+### Declaração
+
+\`\`\`css
+:root {
+  --primary-color: #10a37f;
+  --spacing-md: 16px;
+  --font-main: system-ui, sans-serif;
+}
+
+.elemento {
+  color: var(--primary-color);
+  padding: var(--spacing-md);
+  font-family: var(--font-main);
+}
+\`\`\`
+
+### JavaScript dynamic update
+
+\`\`\`javascript
+document.documentElement.style.setProperty(
+  '--primary-color',
+  '#ff5722'
+);
+\`\`\`
+
+### Herança e Sobrescrita
+
+Variáveis CSS respeitam cascata e herdam como qualquer propriedade CSS:
+
+\`\`\`css
+.card {
+  --bg-color: #333;
+  background: var(--bg-color);
+}
+
+.card.highlight {
+  --bg-color: #10a37f; /* sobrescreve apenas aqui */
+}
+\`\`\`
+    `
+  },
+  {
+    id: 'container-queries',
+    title: 'Container Queries',
+    icon: 'responsive',
+    tag: 'Responsivo',
+    content: `
+## Container Queries
+
+.container queries permitem estilizar elementos baseados no tamanho do container, não da viewport!
+
+### Sintaxe Básica
+
+\`\`\`css
+.card-container {
+  container-type: inline-size;
+}
+
+/* Estilos baseados no container */
+@container (min-width: 400px) {
+  .card {
+    display: flex;
+  }
+}
+
+@container (max-width: 300px) {
+  .card {
+    flex-direction: column;
+  }
+}
+\`\`\`
+
+### Container Name
+
+\`\`\`css
+.sidebar {
+  container-name: sidebar;
+}
+
+@container sidebar (min-width: 300px) {
+  /* estilos */
+}
+\`\`\`
+
+### Benefícios
+
+- Componentes verdadeiramente responsivos
+- Reutilização de componentes
+- Independente do viewport
+- Modularidade
+    `
+  },
+  {
+    id: 'animations',
+    title: 'Animações CSS Avançadas',
+    icon: 'animation',
+    tag: 'Animações',
+    content: `
+## Animações e Transições
+
+Crie animações performáticas e suaves com CSS puro.
+
+### Transitions
+
+\`\`\`css
+.button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+\`\`\`
+
+### Keyframes
+
+\`\`\`css
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.element {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+\`\`\`
+
+### Performance
+
+- Use \`transform\` e \`opacity\` para animações de alta performance
+- Evite animar \`width\`, \`height\`, \`margin\`
+- Use \`will-change\` quando necessário
+- Prefira \`translate3d\` para ativar GPU
+    `
+  },
+  {
+    id: 'selectors',
+    title: 'Seletores Avançados',
+    icon: 'code',
+    tag: 'Seletores',
+    content: `
+## Seletores CSS Poderosos
+
+Dominar seletores avançados permite criar estilos mais específicos e reutilizáveis.
+
+### Pseudo-classes
+
+\`\`\`css
+/* Primeiro e último filho */
+li:first-child { margin-left: 0; }
+li:last-child { margin-right: 0; }
+
+/* nth-child */
+tr:nth-child(even) { background: #f5f5f5; }
+
+/* State selectors */
+a:hover, a:focus { text-decoration: underline; }
+\`\`\`
+
+### Pseudo-elementos
+
+\`\`\`css
+/* Conteúdo gerado */
+.button::before {
+  content: '→ ';
+}
+
+/* First line/letter */
+p::first-line { font-weight: bold; }
+p::first-letter { font-size: 2em; }
+
+/* Selection */
+::selection {
+  background: var(--primary-color);
+  color: white;
+}
+\`\`\`
+
+### Combinators
+
+\`\`\`css
+/* Descendant */
+nav ul li a { color: blue; }
+
+/* Child (mais específico) */
+nav > ul > li > a { color: red; }
+
+/* Adjacent sibling */
+h2 + p { margin-top: 0; }
+
+/* General sibling */
+h2 ~ p { color: gray; }
+\`\`\`
+
+### Attribute selectors
+
+\`\`\`css
+a[href^="https"]::after {
+  content: ' (external)';
+}
+
+input[type="email"] {
+  border-color: blue;
+}
+\`\`\`
+    `
+  }
+];
+
+// Examples data
+const EXAMPLES_DATA = [
+  {
+    id: 'flex-center',
+    title: 'Centralização com Flexbox',
+    description: 'Centraliza elementos vertical e horizontalmente',
+    code: `.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}`,
+    styles: `
+.demo-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+}
+.demo-child {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+    `
+  },
+  {
+    id: 'grid-layout',
+    title: 'Layout com Grid',
+    description: 'Grid layout responsivo com áreas nomeadas',
+    code: `.container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  gap: 10px;
+}
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }`,
+    styles: `
+.demo-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 8px;
+  height: 200px;
+  background: #f0f0f0;
+  padding: 8px;
+  border-radius: 8px;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+.demo-header {
+  grid-area: header;
+  background: #667eea;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+.demo-main {
+  grid-area: main;
+  background: #764ba2;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+}
+.demo-sidebar {
+  grid-area: sidebar;
+  background: #f093fb;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+}
+.demo-footer {
+  grid-area: footer;
+  background: #4facfe;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+    `
+  },
+  {
+    id: 'card-hover',
+    title: 'Card Hover Effects',
+    description: 'Efeitos suaves de hover com transition e transform',
+    code: `.card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 12px;
+  background: white;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}`,
+    styles: `
+.demo-card-hover {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+}
+.demo-card-item {
+  background: white;
+  padding: 24px 32px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-weight: 500;
+}
+.demo-card-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+    `
+  },
+  {
+    id: 'gradient-bg',
+    title: 'Gradient Background',
+    description: 'Backgrounds animados com gradientes CSS',
+    code: `.box {
+  background: linear-gradient(
+    45deg,
+    #ff6b6b,
+    #feca57,
+    #48dbfb,
+    #ff9ff3
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}`,
+    styles: `
+.demo-gradient-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  background: #1a1a2e;
+  border-radius: 8px;
+}
+.demo-gradient-box {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  background: linear-gradient(
+    45deg,
+    #ff6b6b,
+    #feca57,
+    #48dbfb,
+    #ff9ff3
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+    `
+  }
+];
+
+// --- State Management ---
+let sessions = loadSessions();
+let currentChatId = localStorage.getItem(CURRENT_KEY);
+let isTyping = false;
+let currentTab = 'chat';
+
+loadUI();
+
+// --- DOM Elements ---
+const sidebar = document.getElementById('sidebar');
+const menuToggle = document.getElementById('menuToggle');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const chatHistory = document.getElementById('chatHistory');
+const newChatBtn = document.getElementById('newChatBtn');
+const messagesEl = document.getElementById('messages');
+const welcomeScreen = document.getElementById('welcomeScreen');
+const messageInput = document.getElementById('messageInput');
+const sendBtn = document.getElementById('sendBtn');
+const inputArea = document.getElementById('inputArea');
+const tabNav = document.getElementById('tabNav');
+const tabPanels = document.querySelector('.tab-panels');
+
+// --- Tab Navigation ---
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tabId = btn.dataset.tab;
+    switchTab(tabId);
+  });
+});
+
+function switchTab(tabId) {
+  // Update buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tabId);
+  });
+
+  // Update panels
+  document.querySelectorAll('.tab-panel').forEach(panel => {
+    panel.classList.toggle('active', panel.id === tabId + 'Panel');
+  });
+
+  currentTab = tabId;
+
+  // Load content based on tab
+  if (tabId === 'docs') {
+    loadDocumentation();
+  } else if (tabId === 'examples') {
+    loadExamples();
+  }
+
+  // Close mobile sidebar
+  closeSidebar();
+}
+
+function loadDocumentation() {
+  const docsList = document.getElementById('docsList');
+  if (docsList.querySelector('.doc-card')) return; // already loaded
+
+  docsList.innerHTML = DOCS_DATA.map(doc => `
+    <div class="doc-card" data-doc="${doc.id}">
+      <div class="doc-icon">
+        ${getIcon(doc.icon)}
+      </div>
+      <h3>${doc.title}</h3>
+      <p>${doc.content.split('\n')[1]}</p>
+      <span class="doc-tag">${doc.tag}</span>
+    </div>
+  `).join('');
+
+  // Add click listeners
+  docsList.querySelectorAll('.doc-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const doc = DOCS_DATA.find(d => d.id === card.dataset.doc);
+      if (doc) {
+        openDocumentationModal(doc);
+      }
+    });
+  });
+}
+
+function loadExamples() {
+  const examplesGrid = document.getElementById('examplesGrid');
+  if (examplesGrid.querySelector('.example-card')) return; // already loaded
+
+  examplesGrid.innerHTML = EXAMPLES_DATA.map(example => `
+    <div class="example-card" data-example="${example.id}">
+      <h3>${example.title}</h3>
+      <p>${example.description}</p>
+      <div class="example-preview" style="${example.styles}">
+        ${getExamplePreview(example.id)}
+      </div>
+      <button class="example-btn">Ver Código</button>
+    </div>
+  `).join('');
+
+  // Add click listeners
+  examplesGrid.querySelectorAll('.example-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = e.target.closest('.example-card');
+      const example = EXAMPLES_DATA.find(ex => ex.id === card.dataset.example);
+      if (example) {
+        openExampleModal(example);
+      }
+    });
+  });
+}
+
+function getExamplePreview(id) {
+  const previews = {
+    'flex-center': '<div class="demo-child"></div>',
+    'grid-layout': `
+      <div class="demo-header">Header</div>
+      <div class="demo-main">Main</div>
+      <div class="demo-sidebar">Sidebar</div>
+      <div class="demo-footer">Footer</div>
+    `,
+    'card-hover': '<div class="demo-card-item">Hover me</div>',
+    'gradient-bg': '<div class="demo-gradient-box"></div>'
+  };
+  return previews[id] || '';
+}
+
+function getIcon(type) {
+  const icons = {
+    layout: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>',
+    grid: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="8" height="8"></rect><rect x="14" y="2" width="8" height="8"></rect><rect x="2" y="14" width="8" height="8"></rect><rect x="14" y="14" width="8" height="8"></rect></svg>',
+    variables: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg>',
+    responsive: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20l4-16m2 4l4 12M5 20h14"></path></svg>',
+    animation: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"></path></svg>',
+    code: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
+  };
+  return icons[type] || '';
+}
+
+function openDocumentationModal(doc) {
+  const modal = document.getElementById('modalOverlay');
+  const title = document.getElementById('modalTitle');
+  const content = document.getElementById('modalContent');
+
+  title.textContent = doc.title;
+  content.innerHTML = formatMarkdown(doc.content);
+  modal.classList.add('active');
+}
+
+function openExampleModal(example) {
+  const modal = document.getElementById('modalOverlay');
+  const title = document.getElementById('modalTitle');
+  const content = document.getElementById('modalContent');
+
+  title.textContent = example.title;
+  content.innerHTML = `
+    <p>${example.description}</p>
+    <h3>CSS</h3>
+    <pre><code>${escapeHtml(example.code)}</code></pre>
+    <h3>Preview</h3>
+    <div class="example-preview" style="${example.styles}">
+      ${getExamplePreview(example.id)}
+    </div>
+  `;
+  modal.classList.add('active');
+}
+
+// Modal close functionality
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+}
+
+// Format markdown content (simplified)
+function formatMarkdown(text) {
+  let html = escapeHtml(text);
+
+  // Code blocks
+  html = html.replace(/\`\`\`css([\s\S]*?)\`\`\`/g, '<pre><code>$1</code></pre>');
+  html = html.replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre><code>$1</code></pre>');
+
+  // Inline code
+  html = html.replace(/\`([^]+?)\`/g, '<code>$1</code>');
+
+  // Headers
+  html = html.replace(/^## (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^### (.+)$/gm, '<h4>$1</h4>');
+
+  // Bold
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+  // Lists
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+
+  // Wrap consecutive li in ul
+  html = html.replace(/((<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+  // Paragraphs
+  html = html.replace(/\n\n/g, '</p><p>');
+
+  return `<p>${html}</p>`;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
 
 function getAIResponse(userMessage) {
   const lower = userMessage.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
