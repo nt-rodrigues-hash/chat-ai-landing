@@ -382,6 +382,10 @@ const sections = document.querySelectorAll('.section');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarToggle = document.getElementById('sidebarToggle');
+
+// Initialize
+loadSidebarState();
 const welcomeScreen = document.getElementById('welcomeScreen');
 const messagesEl = document.getElementById('messages');
 const chatInputContainer = document.getElementById('chatInputContainer');
@@ -434,20 +438,50 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===========================
-// Sidebar Mobile
+// Sidebar Mobile Toggle
 // ===========================
-menuToggle.addEventListener('click', toggleSidebar);
-sidebarOverlay.addEventListener('click', closeSidebar);
-
-function toggleSidebar() {
+menuToggle.addEventListener('click', () => {
   sidebar.classList.toggle('open');
   sidebarOverlay.classList.toggle('active');
-}
+});
 
-function closeSidebar() {
+sidebarOverlay.addEventListener('click', () => {
   sidebar.classList.remove('open');
   sidebarOverlay.classList.remove('active');
-}
+});
+
+// ===========================
+// Sidebar Collapse Toggle (Desktop)
+// ===========================
+sidebarToggle.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+  localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+});
+
+// Restore sidebar collapse state on load
+(function initSidebar() {
+  const collapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+  if (collapsed && window.innerWidth > 768) {
+    sidebar.classList.add('collapsed');
+  }
+})();
+
+// Handle window resize - clean up states
+window.addEventListener('resize', () => {
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    // On mobile: always show sidebar normally (not collapsed)
+    sidebar.classList.remove('collapsed');
+    // Also close any open menu
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+  } else {
+    // On desktop: close mobile overlay if somehow open
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+  }
+});
 
 // ===========================
 // Documentation
