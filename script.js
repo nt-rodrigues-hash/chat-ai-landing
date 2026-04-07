@@ -548,40 +548,48 @@ const welcomeScreen = document.getElementById('welcomeScreen');
 const messageInput = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
 const inputArea = document.getElementById('inputArea');
-const tabNav = document.getElementById('tabNav');
-const tabPanels = document.querySelector('.tab-panels');
 
-// --- Tab Navigation ---
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tabId = btn.dataset.tab;
-    switchTab(tabId);
+// --- Sidebar Navigation ---
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    const section = item.dataset.nav;
+    navigateToSection(section);
   });
 });
 
-function switchTab(tabId) {
-  // Update buttons
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === tabId);
+function navigateToSection(section) {
+  // Update nav items
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.nav === section);
   });
 
   // Update panels
   document.querySelectorAll('.tab-panel').forEach(panel => {
-    panel.classList.toggle('active', panel.id === tabId + 'Panel');
+    panel.classList.toggle('active', panel.id === section + 'Panel');
   });
 
-  currentTab = tabId;
+  currentTab = section;
 
-  // Load content based on tab
-  if (tabId === 'docs') {
+  // Load content based on section
+  if (section === 'docs') {
     loadDocumentation();
-  } else if (tabId === 'examples') {
+  } else if (section === 'examples') {
     loadExamples();
   }
 
-  // Close mobile sidebar
+  // Close mobile sidebar on navigation
   closeSidebar();
+
+  // Save preference
+  localStorage.setItem('currentSection', section);
 }
+
+// Restore last section on load
+window.addEventListener('DOMContentLoaded', () => {
+  const savedSection = localStorage.getItem('currentSection') || 'chat';
+  navigateToSection(savedSection);
+});
 
 function loadDocumentation() {
   const docsList = document.getElementById('docsList');
