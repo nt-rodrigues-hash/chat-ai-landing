@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat AI - Landing Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <button class="new-chat-btn" id="newChatBtn" title="Novo Chat">
+          + Nova conversa
+        </button>
+      </div>
+      <div class="chat-history" id="chatHistory">
+        <!-- Chat sessions rendered here -->
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">CB</div>
+          <span class="user-name">Cleiton</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main" id="chatMain">
+      <!-- Mobile menu button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Welcome Screen -->
+      <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+        </div>
+        <h1>Como posso ajudar voc&ecirc;?</h1>
+        <div class="suggestions">
+          <button class="suggestion-btn" data-prompt="Explique CSS Grid de forma simples">
+            Explique CSS Grid de forma simples
+          </button>
+          <button class="suggestion-btn" data-prompt="Crie um exemplo de flexbox">
+            Crie um exemplo de flexbox
+          </button>
+          <button class="suggestion-btn" data-prompt="O que s&aacute;o CSS Custom Properties?">
+            O que são CSS Custom Properties?
+          </button>
+          <button class="suggestion-btn" data-prompt="Melhores praticas de CSS">
+            Melhores práticas de CSS
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="messages" id="messages" hidden>
+        <!-- Messages rendered here -->
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-area" id="inputArea">
+        <div class="input-container">
+          <textarea
+            id="messageInput"
+            placeholder="Envie uma mensagem..."
+            rows="1"
+          ></textarea>
+          <button id="sendBtn" class="send-btn" aria-label="Enviar mensagem">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3,3 L21,12 L3,21 L3,16 L14,12 L3,8 Z"></path>
+            </svg>
+          </button>
+        </div>
+        <p class="disclaimer">IA pode cometer erros. Verifique informações importantes.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Overlay for mobile sidebar -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
