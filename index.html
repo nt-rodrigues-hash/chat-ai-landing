@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat AI - Landing Page</title>
+  <title>CSS Social Media - Chat & Docs</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,27 +20,27 @@
       </div>
 
       <nav class="sidebar-nav">
-        <a href="#chat" class="nav-item active" data-nav="chat">
+        <a href="#chat" class="nav-item active" data-section="chat">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path>
           </svg>
           <span>Chat</span>
         </a>
-        <a href="#docs" class="nav-item" data-nav="docs">
+        <a href="#docs" class="nav-item" data-section="docs">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path>
           </svg>
           <span>Documentação</span>
         </a>
-        <a href="#examples" class="nav-item" data-nav="examples">
+        <a href="#examples" class="nav-item" data-section="examples">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="16 18 22 12 16 6"></polyline>
             <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
           <span>Exemplos</span>
         </a>
-        <a href="#about" class="nav-item" data-nav="about">
+        <a href="#about" class="nav-item" data-section="about">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -61,9 +61,9 @@
       </div>
     </aside>
 
-    <!-- Main Chat Area -->
-    <main class="chat-main" id="chatMain">
-      <!-- Mobile menu button -->
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Mobile menu toggle -->
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -72,205 +72,161 @@
         </svg>
       </button>
 
-      <!-- Tab Panels -->
-      <div class="tab-panels">
-        <!-- Chat Panel -->
-        <div class="tab-panel active" id="chatPanel">
+      <!-- Section Panels -->
+      <div class="sections-container">
+        <!-- Chat Section -->
+        <section class="section active" id="chatSection">
           <!-- Welcome Screen -->
           <div class="welcome-screen" id="welcomeScreen">
             <div class="welcome-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <circle cx="12" cy="12" r="4"></circle>
                 <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
               </svg>
             </div>
-            <h1>Como posso ajudar voc&ecirc;?</h1>
+            <h1>Como posso ajudar você?</h1>
+            <p class="subtitle">Pergunte sobre CSS, Flexbox, Grid ou técnicas avançadas</p>
             <div class="suggestions">
               <button class="suggestion-btn" data-prompt="Explique CSS Grid de forma simples">
-                Explique CSS Grid de forma simples
+                📐 CSS Grid
               </button>
-              <button class="suggestion-btn" data-prompt="Crie um exemplo de flexbox">
-                Crie um exemplo de flexbox
+              <button class="suggestion-btn" data-prompt="Como funciona Flexbox?">
+                🔧 Flexbox
               </button>
-              <button class="suggestion-btn" data-prompt="O que s&atilde;o CSS Custom Properties?">
-                O que s&atilde;o CSS Custom Properties?
+              <button class="suggestion-btn" data-prompt="O que são CSS Custom Properties?">
+                🎨 Variáveis CSS
               </button>
-              <button class="suggestion-btn" data-prompt="Melhores praticas de CSS">
-                Melhores pr&aacute;ticas de CSS
+              <button class="suggestion-btn" data-prompt="Melhores práticas de CSS">
+                ⭐ Boas Práticas
               </button>
             </div>
           </div>
 
           <!-- Messages Area -->
           <div class="messages" id="messages" hidden>
-            <!-- Messages rendered here -->
+            <!-- Messages will be rendered here -->
           </div>
 
-          <!-- Input Area -->
-          <div class="input-area" id="inputArea">
-            <div class="input-container">
+          <!-- Chat Input -->
+          <div class="chat-input-container" id="chatInputContainer" hidden>
+            <div class="input-wrapper">
               <textarea
                 id="messageInput"
-                placeholder="Envie uma mensagem..."
+                placeholder="Digite sua mensagem..."
                 rows="1"
               ></textarea>
               <button id="sendBtn" class="send-btn" aria-label="Enviar mensagem">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3,3 L21,12 L3,21 L3,16 L14,12 L3,8 Z"></path>
                 </svg>
               </button>
             </div>
-            <p class="disclaimer">IA pode cometer erros. Verifique informa&ccedil;&otilde;es importantes.</p>
+            <p class="disclaimer">⚠️ IA pode cometer erros. Verifique informações importantes.</p>
           </div>
-        </div>
+        </section>
 
-        <!-- Documentation Panel -->
-        <div class="tab-panel" id="docsPanel">
-          <div class="docs-content">
-            <h2>Documenta&ccedil;&atilde;o CSS Avan&ccedil;ado</h2>
-            <div class="docs-list" id="docsList">
-              <div class="doc-card" data-doc="flexbox">
-                <div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
-                <h3>Flexbox Avan&ccedil;ado</h3>
-                <p>T&eacute;cnicas poderosas de layout unidimensional.</p>
-                <span class="doc-tag">Layout</span>
-              </div>
-              <div class="doc-card" data-doc="grid">
-                <div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="8" height="8"></rect><rect x="14" y="2" width="8" height="8"></rect><rect x="2" y="14" width="8" height="8"></rect><rect x="14" y="14" width="8" height="8"></rect></svg></div>
-                <h3>CSS Grid Avan&ccedil;ado</h3>
-                <p>Sistema de layout bidimensional completo.</p>
-                <span class="doc-tag">Layout</span>
-              </div>
-              <div class="doc-card" data-doc="custom-properties">
-                <div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg></div>
-                <h3>Custom Properties</h3>
-                <p>Vari&aacute;veis CSS para c&oacute;digo reutiliz&aacute;vel.</p>
-                <span class="doc-tag">Vari&aacute;veis</span>
-              </div>
-              <div class="doc-card" data-doc="container-queries">
-                <div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20l4-16m2 4l4 12M5 20h14"></path></svg></div>
-                <h3>Container Queries</h3>
-                <p>Responsividade baseada no container, n&atilde;o naviewport.</p>
-                <span class="doc-tag">Responsivo</span>
-              </div>
-              <div class="doc-card" data-doc="animations">
-                <div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"></path></svg></div>
-                <h3>Anima&ccedil;&otilde;es CSS</h3>
-                <p>Transitions, keyframes e performances otimizadas.</p>
-                <span class="doc-tag">Anima&ccedil;&atilde;o</span>
-              </div>
-              <div class="doc-card" data-doc="selectors">
-                <div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
-                <h3>Seletores Avan&ccedil;ados</h3>
-                <p>Pseudo-classes e pseudo-elementos poderosos.</p>
-                <span class="doc-tag">Seletores</span>
+        <!-- Documentation Section -->
+        <section class="section" id="docsSection">
+          <div class="section-header">
+            <h2>📚 Documentação CSS</h2>
+            <p>Técnicas avançadas para designs incríveis</p>
+          </div>
+          <div class="docs-grid" id="docsGrid">
+            <!-- Cards will be injected by JS -->
+          </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section class="section" id="examplesSection">
+          <div class="section-header">
+            <h2>🎯 Exemplos Interativos</h2>
+            <p>Veja o CSS em ação</p>
+          </div>
+          <div class="examples-grid" id="examplesGrid">
+            <!-- Cards will be injected by JS -->
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="aboutSection">
+          <div class="section-header">
+            <h2>ℹ️ Sobre o Projeto</h2>
+          </div>
+          <div class="about-card">
+            <div class="about-logo">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+              <div>
+                <h3>CSS Social Media</h3>
+                <p class="tagline">Aprenda CSS avançado na prática</p>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Examples Panel -->
-        <div class="tab-panel" id="examplesPanel">
-          <div class="examples-content">
-            <h2>Exemplos Interativos</h2>
-            <div class="examples-grid" id="examplesGrid">
-              <div class="example-card" data-example="flex-center">
-                <h3>Centraliza&ccedil;&atilde;o com Flexbox</h3>
-                <p>Centraliza elementos vertical e horizontalmente.</p>
-                <div class="example-preview demo-flex-center">
-                  <div class="demo-child"></div>
-                </div>
-                <button class="example-btn">Ver C&oacute;digo</button>
-              </div>
-              <div class="example-card" data-example="grid-layout">
-                <h3>Layout com Grid</h3>
-                <p>Grid layout responsivo com &aacute;reas nomeadas.</p>
-                <div class="example-preview demo-grid-layout">
-                  <div class="demo-header">Header</div>
-                  <div class="demo-main">Main</div>
-                  <div class="demo-sidebar">Sidebar</div>
-                  <div class="demo-footer">Footer</div>
-                </div>
-                <button class="example-btn">Ver C&oacute;digo</button>
-              </div>
-              <div class="example-card" data-example="card-hover">
-                <h3>Card Hover Effects</h3>
-                <p>Efeitos suaves de hover com transition e transform.</p>
-                <div class="example-preview demo-card-hover">
-                  <div class="demo-card-item">Hover me</div>
-                </div>
-                <button class="example-btn">Ver C&oacute;digo</button>
-              </div>
-              <div class="example-card" data-example="gradient-bg">
-                <h3>Gradient Background</h3>
-                <p>Backgrounds animados com gradientes CSS.</p>
-                <div class="example-preview demo-gradient-bg">
-                  <div class="demo-gradient-box"></div>
-                </div>
-                <button class="example-btn">Ver C&oacute;digo</button>
+            <div class="about-section">
+              <h4>🚀 Sobre</h4>
+              <p>Este projeto foi criado para facilitar o aprendizado de CSS avançado através de exemplos práticos, documentação organizada e um chat interativo.</p>
+            </div>
+
+            <div class="about-section">
+              <h4>🛠️ Tecnologias</h4>
+              <div class="tech-tags">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+                <span>Flexbox</span>
+                <span>Grid</span>
+                <span>Custom Properties</span>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- About Panel -->
-        <div class="tab-panel" id="aboutPanel">
-          <div class="about-content">
-            <h2>Sobre o Projeto</h2>
-            <div class="about-card">
-              <h3>CSS Social Media</h3>
-              <p>Um projeto de estudo e compartilhamento de conhecimento sobre CSS avan&ccedil;ado.</p>
-              <hr>
-              <h4>Tecnologias utilizadas:</h4>
+            <div class="about-section">
+              <h4>📚 Recursos</h4>
               <ul>
-                <li>HTML5 sem&acirc;ntico</li>
-                <li>CSS Moderno (Flexbox, Grid, Custom Properties)</li>
-                <li>JavaScript Vanilla (ES6+)</li>
-                <li>LocalStorage para persist&ecirc;ncia</li>
+                <li><strong>Chat</strong> - Pergunte sobre CSS e receba respostas com exemplos</li>
+                <li><strong>Documentação</strong> - Guias completos de Flexbox, Grid e mais</li>
+                <li><strong>Exemplos</strong> - Demonstrações interativas que você pode explorar</li>
               </ul>
-              <hr>
-              <h4>Recursos:</h4>
+            </div>
+
+            <div class="about-section">
+              <h4>📖 Conteúdo Disponível</h4>
               <ul>
-                <li><strong>Chat:</strong> Conversas interativas com demonstra&ccedil;&otilde;es de CSS</li>
-                <li><strong>Documenta&ccedil;&atilde;o:</strong> Notas t&eacute;cnicas organizadas</li>
-                <li><strong>Exemplos:</strong> Demonstra&ccedil;&otilde;es pr&aacute;ticas e interativas</li>
-                <li><strong>Design responsivo</strong> com tema escuro</li>
+                <li>Flexbox Avançado</li>
+                <li>CSS Grid Avançado</li>
+                <li>Técnicas Poderosas para Designs Incríveis</li>
+                <li>Container Queries</li>
+                <li>Animações CSS</li>
+                <li>Seletores Avançados</li>
               </ul>
-              <hr>
-              <h4>Conte&uacute;do das Notas:</h4>
-              <ul>
-                <li>Flexbox Avan&ccedil;ado</li>
-                <li>CSS Grid Avan&ccedil;ado</li>
-                <li>T&eacute;cnicas Poderosas para Designs Incr&iacute;veis</li>
-              </ul>
-              <hr>
-              <p class="version">Vers&atilde;o 1.0.0</p>
-              <p class="author">Desenvolvido por Cleiton Borges</p>
+            </div>
+
+            <div class="about-footer">
+              <p>Versão 1.0.0</p>
+              <p>Desenvolvido por <strong>Cleiton Borges</strong></p>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
   </div>
 
-  <!-- Overlay for mobile sidebar -->
+  <!-- Mobile Sidebar Overlay -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <!-- Modal for Documentation -->
+  <!-- Modal for Code Preview -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal" role="dialog" aria-modal="true">
       <div class="modal-header">
-        <h2 id="modalTitle">Título</h2>
-        <button class="modal-close" id="modalClose" aria-label="Fechar modal">
+        <h2 id="modalTitle">Código</h2>
+        <button class="modal-close" id="modalClose" aria-label="Fechar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
       </div>
-      <div class="modal-content" id="modalContent">
-        <!-- Content will be injected -->
-      </div>
+      <div class="modal-content" id="modalContent"></div>
     </div>
   </div>
 
